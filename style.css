@@ -1,0 +1,457 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+    min-height: 100vh;
+    background: #ffffff;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #2f1719;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px;
+    overflow-x: hidden;
+}
+
+.game-container {
+    width: 100%;
+    max-width: 430px;
+    margin: 0 auto;
+    padding: 28px 22px 24px;
+
+    background: #ffffff;
+    border: 1px solid #f3e4e4;
+    border-radius: 30px;
+
+    text-align: center;
+
+    box-shadow:
+        0 20px 60px rgba(117, 20, 27, 0.12),
+        0 2px 10px rgba(117, 20, 27, 0.05);
+}
+
+h1 {
+    margin-bottom: 25px;
+    color: #b51f2a;
+
+    font-size: 36px;
+    font-weight: 900;
+    letter-spacing: 6px;
+}
+
+/* SETUP */
+
+.setup {
+    width: 100%;
+    max-width: 360px;
+    margin: 0 auto;
+    padding: 25px 20px;
+
+    background: #fffafa;
+    border: 1px solid #f3dddd;
+    border-radius: 22px;
+}
+
+.setup h2 {
+    margin-bottom: 23px;
+    color: #571c20;
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.letter-inputs {
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.letter-player {
+    flex: 1;
+    min-width: 0;
+}
+
+.letter-player label {
+    display: block;
+    margin-bottom: 7px;
+
+    color: #8b6265;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.letter-player input {
+    display: block;
+
+    width: 100%;
+    height: 60px;
+
+    padding: 0;
+
+    background: #ffffff;
+    border: 2px solid #ead0d2;
+    border-radius: 16px;
+
+    color: #b51f2a;
+
+    font-size: 27px;
+    font-weight: 900;
+
+    text-align: center;
+    text-transform: uppercase;
+
+    outline: none;
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+.letter-player input:focus {
+    border-color: #c93640;
+}
+
+.vs {
+    flex: 0 0 25px;
+    margin-top: 21px;
+
+    color: #c93640;
+    font-size: 11px;
+    font-weight: 900;
+}
+
+.error-message {
+    min-height: 20px;
+    margin-bottom: 12px;
+
+    color: #c32835;
+    font-size: 13px;
+}
+
+.start-btn {
+    display: block;
+
+    width: 100%;
+    max-width: 300px;
+    height: 50px;
+
+    margin: 0 auto;
+
+    border: 0;
+    border-radius: 15px;
+
+    background: #b51f2a;
+    color: #ffffff;
+
+    font-size: 15px;
+    font-weight: 800;
+
+    cursor: pointer;
+}
+
+/* GAME */
+
+.game-area {
+    display: none;
+    width: 100%;
+}
+
+.players {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 18px;
+}
+
+.player {
+    flex: 1;
+
+    min-height: 62px;
+    padding: 10px 8px;
+
+    background: #ffffff;
+    border: 1px solid #eedbdb;
+    border-radius: 17px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.player span {
+    color: #8c6669;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.player strong {
+    min-height: 21px;
+    margin-top: 3px;
+
+    color: #b51f2a;
+    font-size: 20px;
+}
+
+.player.active {
+    background: #fff1f2;
+    border: 2px solid #d94b54;
+}
+
+.status {
+    min-height: 24px;
+    margin-bottom: 14px;
+
+    color: #571c20;
+    font-size: 16px;
+    font-weight: 800;
+}
+
+/* =========================
+   BOARD
+========================= */
+
+.board {
+    width: 100%;
+    max-width: 330px;
+
+    margin: 0 auto 20px;
+
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 8px;
+
+    touch-action: manipulation;
+}
+
+/* IMPORTANT:
+   Every cell now has its own fixed aspect ratio.
+   No height:100% and no grid-template-rows.
+*/
+
+.cell {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+
+    min-width: 0;
+    min-height: 0;
+
+    padding: 0;
+    margin: 0;
+
+    border: 2px solid #efdede;
+    border-radius: 18px;
+
+    background: #fffafa;
+
+    color: #b51f2a;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: clamp(40px, 12vw, 60px);
+    font-weight: 900;
+
+    line-height: 1;
+
+    cursor: pointer;
+
+    outline: none;
+
+    appearance: none;
+    -webkit-appearance: none;
+
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+
+    /* VERY IMPORTANT FOR MOBILE */
+    pointer-events: auto;
+}
+
+.cell.p1 {
+    color: #b51f2a;
+}
+
+.cell.p2 {
+    color: #e05a62;
+}
+
+.cell.winner {
+    background: #ffe1e3;
+    border-color: #cf3d47;
+    color: #a91522;
+}
+
+/* BUTTONS */
+
+.buttons {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+
+    gap: 9px;
+}
+
+.undo-btn {
+    flex: 0 0 52px;
+
+    width: 52px;
+    height: 46px;
+
+    padding: 0;
+
+    border: 1px solid #edd7d8;
+    border-radius: 14px;
+
+    background: #fff7f7;
+    color: #b51f2a;
+
+    font-size: 25px;
+
+    cursor: pointer;
+}
+
+.restart-btn,
+.change-btn {
+    flex: 1;
+
+    height: 46px;
+
+    border-radius: 14px;
+
+    font-size: 14px;
+    font-weight: 800;
+
+    cursor: pointer;
+}
+
+.restart-btn {
+    border: none;
+    background: #b51f2a;
+    color: #ffffff;
+}
+
+.change-btn {
+    border: 1px solid #e6bfc2;
+    background: #ffffff;
+    color: #b51f2a;
+}
+
+/* MOBILE */
+
+@media (max-width: 480px) {
+
+    body {
+        padding: 12px;
+    }
+
+    .game-container {
+        width: 100%;
+        padding: 22px 16px 18px;
+        border-radius: 24px;
+    }
+
+    h1 {
+        margin-bottom: 20px;
+        font-size: 30px;
+        letter-spacing: 5px;
+    }
+
+    .setup {
+        width: 100%;
+        max-width: 350px;
+        padding: 20px 14px;
+    }
+
+    .setup h2 {
+        font-size: 18px;
+    }
+
+    .letter-inputs {
+        max-width: 300px;
+        gap: 9px;
+    }
+
+    .letter-player input {
+        height: 54px;
+        font-size: 25px;
+    }
+
+    .start-btn {
+        max-width: 300px;
+    }
+
+    .board {
+        width: 100%;
+        max-width: 330px;
+        gap: 7px;
+    }
+
+    .cell {
+        border-radius: 15px;
+        font-size: clamp(38px, 12vw, 55px);
+    }
+}
+
+@media (max-width: 350px) {
+
+    body {
+        padding: 8px;
+    }
+
+    .game-container {
+        padding: 18px 12px;
+    }
+
+    h1 {
+        font-size: 27px;
+        letter-spacing: 4px;
+    }
+
+    .setup {
+        max-width: 320px;
+        padding: 18px 10px;
+    }
+
+    .letter-inputs {
+        max-width: 280px;
+        gap: 7px;
+    }
+
+    .letter-player input {
+        height: 50px;
+        font-size: 23px;
+    }
+
+    .board {
+        max-width: 300px;
+        gap: 6px;
+    }
+
+    .cell {
+        border-radius: 12px;
+        font-size: 45px;
+    }
+
+    .undo-btn {
+        flex-basis: 44px;
+        width: 44px;
+    }
+}
