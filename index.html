@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    >
+
+    <title>Roha</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="game-container">
+
+        <h1>ROHA</h1>
+
+        <!-- SETUP SCREEN -->
+        <div id="setup" class="setup">
+
+            <h2>Choose Your Letters</h2>
+
+            <div class="letter-inputs">
+
+                <div class="letter-player">
+                    <label for="letter1">Player 1</label>
+
+                    <input
+                        id="letter1"
+                        type="text"
+                        maxlength="1"
+                        autocomplete="off"
+                        spellcheck="false"
+                        inputmode="text"
+                    >
+                </div>
+
+                <div class="vs">VS</div>
+
+                <div class="letter-player">
+                    <label for="letter2">Player 2</label>
+
+                    <input
+                        id="letter2"
+                        type="text"
+                        maxlength="1"
+                        autocomplete="off"
+                        spellcheck="false"
+                        inputmode="text"
+                    >
+                </div>
+
+            </div>
+
+            <div
+                id="errorMessage"
+                class="error-message"
+            ></div>
+
+            <button
+                id="startBtn"
+                class="start-btn"
+                type="button"
+            >
+                Start Game
+            </button>
+
+        </div>
+
+
+        <!-- GAME SCREEN -->
+        <div
+            id="gameArea"
+            class="game-area"
+        >
+
+            <!-- PLAYERS -->
+
+            <div class="players">
+
+                <div
+                    id="player1"
+                    class="player active"
+                >
+                    <span id="player1Label"></span>
+                    <strong id="score1"></strong>
+                </div>
+
+                <div
+                    id="player2"
+                    class="player"
+                >
+                    <span id="player2Label"></span>
+                    <strong id="score2"></strong>
+                </div>
+
+            </div>
+
+
+            <!-- STATUS -->
+
+            <div
+                id="status"
+                class="status"
+            ></div>
+
+
+            <!-- GAME BOARD -->
+
+            <div
+                id="board"
+                class="board"
+            >
+
+                <button class="cell" data-index="0" type="button"></button>
+
+                <button class="cell" data-index="1" type="button"></button>
+
+                <button class="cell" data-index="2" type="button"></button>
+
+                <button class="cell" data-index="3" type="button"></button>
+
+                <button class="cell" data-index="4" type="button"></button>
+
+                <button class="cell" data-index="5" type="button"></button>
+
+                <button class="cell" data-index="6" type="button"></button>
+
+                <button class="cell" data-index="7" type="button"></button>
+
+                <button class="cell" data-index="8" type="button"></button>
+
+            </div>
+
+
+            <!-- BUTTONS -->
+
+            <div class="buttons">
+
+                <button
+                    id="undoBtn"
+                    class="undo-btn"
+                    type="button"
+                >
+                    ↶
+                </button>
+
+                <button
+                    id="restartBtn"
+                    class="restart-btn"
+                    type="button"
+                >
+                    Restart
+                </button>
+
+                <button
+                    id="changeLettersBtn"
+                    class="change-btn"
+                    type="button"
+                >
+                    Letters
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
